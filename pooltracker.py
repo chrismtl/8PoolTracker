@@ -1,7 +1,6 @@
 import cv2 as cv
 import numpy as np
 import scipy as sc
-from scipy.ndimage import label as nd_label
 import os
 import matplotlib.pyplot as plt
 
