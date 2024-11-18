@@ -10,6 +10,11 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 os.system('cls')
 
 # === CONSTANTS ===
+NB_EMPTY = 50
+NB_FULL = 900
+MAX_FULL_WHITE = 560
+MIN_FULL_BLACK = 45
+
 DRAW_WHITE_BALL   = (0, 255, 255)
 DRAW_BLACK_BALL   = (0, 0, 0)
 DRAW_FULL_BALL    = (255, 0, 0)
@@ -95,13 +100,13 @@ class Ball:
 
     def classify(self):
         """Classify the ball based on its attributes."""
-        if self.nb_white > 900:  # White ball
+        if self.nb_white > NB_FULL:  # White ball
             self.label = 2
-        elif self.nb_black > 900:  # Black ball
+        elif self.nb_black > NB_FULL:  # Black ball
             self.label = 3
-        elif self.nb_white < 50 and self.nb_black < 50:  # Full ball
+        elif self.nb_white < NB_EMPTY and self.nb_black < NB_EMPTY:  # Full ball
             self.label = 0
-        elif self.nb_white < 560 and self.nb_black > 45:  # Full ball
+        elif self.nb_white < MAX_FULL_WHITE and self.nb_black > MIN_FULL_BLACK:  # Full ball
             self.label = 0
         else:  # Striped ball
             self.label = 1
