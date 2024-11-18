@@ -8,7 +8,17 @@ import matplotlib.pyplot as plt
 os.chdir(os.path.dirname(os.path.abspath(__file__)))
 os.system('cls')
 
+# === TEST FILE ===
+test_file = "b6"
+
+# === PARAMETERS ===
+BLUR_INTENSITY = 9
+HOUGH_DP = 1.2
+HOUGH_PARAM1 = 50
+HOUGH_PARAM2 = 30
+
 # === CONSTANTS ===
+BALL_RADIUS = 23
 NB_EMPTY = 50
 NB_FULL = 900
 MAX_FULL_WHITE = 560
@@ -22,7 +32,6 @@ DRAW_STRIPED_BALL = (0, 255, 0)
 BOARD_TOP_LEFT = (321, 458)
 BOARD_BOTTOM_RIGHT = (2037, 1354)
 
-
 def rescaleFrame(frame, scale=0.75):
     # For images, videos and live videos
     height = int(frame.shape[0] * scale)
@@ -32,7 +41,7 @@ def rescaleFrame(frame, scale=0.75):
     return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
 
 # Load the image
-image = cv.imread('test_board.png')
+image = cv.imread(test_file+'.png')
 
 # Mask
 blank = np.zeros(image.shape[:2], dtype='uint8') #important : mask needs to be the same size of the image
@@ -120,18 +129,18 @@ class Ball:
 gray = cv.cvtColor(image, cv.COLOR_BGR2GRAY)
 
 # Apply GaussianBlur to reduce noise
-blurred = cv.GaussianBlur(gray, (9, 9), 2)
+blurred = cv.GaussianBlur(gray, (BLUR_INTENSITY, BLUR_INTENSITY), 2)
 
 # Use Hough Circle Transform to detect circles
 circles = cv.HoughCircles(
     blurred, 
     cv.HOUGH_GRADIENT, 
-    dp=1.2, 
-    minDist=30, 
-    param1=50, 
-    param2=30, 
-    minRadius=23, 
-    maxRadius=23
+    dp=HOUGH_DP, 
+    minDist=2*BALL_RADIUS, 
+    param1=HOUGH_PARAM1, 
+    param2=HOUGH_PARAM2, 
+    minRadius=BALL_RADIUS, 
+    maxRadius=BALL_RADIUS
 )
 
 # Initialize the result array
