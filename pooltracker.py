@@ -19,8 +19,8 @@ DRAW_BLACK_BALL   = (0, 0, 0)
 DRAW_FULL_BALL    = (255, 0, 0)
 DRAW_STRIPED_BALL = (0, 255, 0)
 
-corner_top_left = (321, 458)
-corner_bottom_right = (2037, 1354)
+BOARD_TOP_LEFT = (321, 458)
+BOARD_BOTTOM_RIGHT = (2037, 1354)
 
 
 def rescaleFrame(frame, scale=0.75):
@@ -36,7 +36,7 @@ image = cv.imread('test_board.png')
 
 # Mask
 blank = np.zeros(image.shape[:2], dtype='uint8') #important : mask needs to be the same size of the image
-mask = cv.rectangle(blank, corner_top_left, corner_bottom_right, 255, thickness=cv.FILLED)
+mask = cv.rectangle(blank, BOARD_TOP_LEFT, BOARD_BOTTOM_RIGHT, 255, thickness=cv.FILLED)
 image = cv.bitwise_and(image, image, mask=mask)
 
 def get_pixels_in_circle(image, center, radius):
