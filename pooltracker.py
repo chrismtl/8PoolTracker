@@ -9,7 +9,8 @@ os.chdir(os.path.dirname(os.path.abspath(__file__)))
 os.system('cls')
 
 # === TEST FILE ===
-test_file = "b6"
+BACKGROUND_TEST_SET = "Red"
+SAMPLE = 'b1'
 
 # === PARAMETERS ===
 BLUR_INTENSITY = 9
@@ -41,7 +42,7 @@ def rescaleFrame(frame, scale=0.75):
     return cv.resize(frame, dimensions, interpolation=cv.INTER_AREA)
 
 # Load the image
-image = cv.imread(test_file+'.png')
+image = cv.imread(f'Data/{BACKGROUND_TEST_SET}/{SAMPLE}.png')
 
 # Mask
 blank = np.zeros(image.shape[:2], dtype='uint8') #important : mask needs to be the same size of the image
